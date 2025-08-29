@@ -3,6 +3,12 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/constants/app_constants.dart';
+import '../security/change_password_screen.dart';
+import '../security/two_factor_auth_screen.dart';
+import '../legal/terms_of_service_screen.dart';
+import '../legal/privacy_policy_screen.dart';
+import '../legal/licenses_screen.dart';
+import '../auth/login_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -114,19 +120,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'Change Password',
                   'Update your account password',
                   HugeIcons.strokeRoundedLockPassword,
-                  () {},
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
+                    );
+                  },
                 ),
                 _buildActionTile(
                   'Two-Factor Authentication',
                   'Add an extra layer of security',
                   HugeIcons.strokeRoundedSecurityCheck,
-                  () {},
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const TwoFactorAuthScreen()),
+                    );
+                  },
                 ),
                 _buildActionTile(
                   'Delete Account',
                   'Permanently delete your account',
                   HugeIcons.strokeRoundedDelete02,
-                  () {},
+                  () {
+                    _showDeleteAccountDialog();
+                  },
                   isDestructive: true,
                 ),
               ],
@@ -139,19 +157,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'Terms of Service',
                   'Read our terms and conditions',
                   HugeIcons.strokeRoundedFile02,
-                  () {},
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const TermsOfServiceScreen()),
+                    );
+                  },
                 ),
                 _buildActionTile(
                   'Privacy Policy',
                   'Learn about our privacy practices',
                   HugeIcons.strokeRoundedSecurityCheck,
-                  () {},
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()),
+                    );
+                  },
                 ),
                 _buildActionTile(
                   'Licenses',
                   'View open source licenses',
                   HugeIcons.strokeRoundedLicenseMaintenance,
-                  () {},
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LicensesScreen()),
+                    );
+                  },
                 ),
               ],
             ),
@@ -168,13 +201,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'Rate App',
                   'Rate Como on the App Store',
                   HugeIcons.strokeRoundedStar,
-                  () {},
+                  () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Opening App Store...'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
                 _buildActionTile(
                   'Share App',
                   'Share Como with friends',
                   HugeIcons.strokeRoundedShare05,
-                  () {},
+                  () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Sharing Como app...'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -431,10 +478,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              // Handle logout
+              // Navigate to login screen and clear navigation stack
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()),
+                (route) => false,
+              );
             },
             child: Text(
               'Logout',
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.error,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteAccountDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Delete Account', style: AppTextStyles.titleLarge),
+        content: Text(
+          'Are you sure you want to permanently delete your account? This action cannot be undone and all your data will be lost.',
+          style: AppTextStyles.bodyMedium,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Cancel',
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Account deletion initiated. You will receive a confirmation email.'),
+                  backgroundColor: AppColors.error,
+                  duration: Duration(seconds: 3),
+                ),
+              );
+            },
+            child: Text(
+              'Delete Account',
               style: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.error,
               ),
