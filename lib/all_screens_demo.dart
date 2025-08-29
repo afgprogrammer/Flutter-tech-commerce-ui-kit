@@ -19,6 +19,11 @@ import '../features/auth/register_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/reviews/reviews_screen.dart';
+import '../features/security/change_password_screen.dart';
+import '../features/security/two_factor_auth_screen.dart';
+import '../features/legal/terms_of_service_screen.dart';
+import '../features/legal/privacy_policy_screen.dart';
+import '../features/legal/licenses_screen.dart';
 
 class AllScreensDemo extends StatelessWidget {
   const AllScreensDemo({super.key});
@@ -187,6 +192,48 @@ class AllScreensDemo extends StatelessWidget {
             ),
             
             _buildSection(
+              'Security & Account',
+              [
+                _buildScreenTile(
+                  'Change Password',
+                  'Update your account password',
+                  HugeIcons.strokeRoundedLockPassword,
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ChangePasswordScreen())),
+                ),
+                _buildScreenTile(
+                  'Two-Factor Authentication',
+                  'Add an extra layer of security',
+                  HugeIcons.strokeRoundedSecurityCheck,
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TwoFactorAuthScreen())),
+                ),
+              ],
+            ),
+            
+            _buildSection(
+              'Legal & Policies',
+              [
+                _buildScreenTile(
+                  'Terms of Service',
+                  'Read our terms and conditions',
+                  HugeIcons.strokeRoundedFile02,
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TermsOfServiceScreen())),
+                ),
+                _buildScreenTile(
+                  'Privacy Policy',
+                  'Learn about our privacy practices',
+                  HugeIcons.strokeRoundedSecurityCheck,
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen())),
+                ),
+                _buildScreenTile(
+                  'Open Source Licenses',
+                  'View open source licenses',
+                  HugeIcons.strokeRoundedLicenseMaintenance,
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LicensesScreen())),
+                ),
+              ],
+            ),
+            
+            _buildSection(
               'Communication & Support',
               [
                 _buildScreenTile(
@@ -221,7 +268,7 @@ class AllScreensDemo extends StatelessWidget {
                   ),
                   const SizedBox(height: AppConstants.paddingM),
                   Text(
-                    'All screens are fully functional and connected!',
+                    'All 25+ screens are fully functional and connected!',
                     style: AppTextStyles.titleMedium.copyWith(
                       color: AppColors.success,
                     ),
@@ -229,7 +276,7 @@ class AllScreensDemo extends StatelessWidget {
                   ),
                   const SizedBox(height: AppConstants.paddingS),
                   Text(
-                    'Start with the Main Screen to experience the complete app flow.',
+                    'Complete e-commerce app with security, legal, and all essential features.',
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.success,
                     ),
