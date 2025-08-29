@@ -376,7 +376,15 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           Row(
             children: [
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  // Show snackbar for helpful action
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Thank you for your feedback!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
                 icon: const HugeIcon(
                   icon: HugeIcons.strokeRoundedThumbsUp,
                   color: AppColors.textSecondary,
@@ -391,7 +399,36 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
               ),
               const Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Show report confirmation dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Report Review'),
+                        content: const Text('Are you sure you want to report this review?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Review reported successfully'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            },
+                            child: const Text('Report'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Text(
                   'Report',
                   style: AppTextStyles.bodySmall.copyWith(

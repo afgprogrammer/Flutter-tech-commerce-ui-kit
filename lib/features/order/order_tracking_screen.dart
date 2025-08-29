@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/constants/app_constants.dart';
+import '../help/help_support_screen.dart';
 
 class OrderTrackingScreen extends StatelessWidget {
   final String orderId;
@@ -33,7 +34,15 @@ class OrderTrackingScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              // Share order tracking info
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Sharing order tracking information...'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
             icon: const HugeIcon(
               icon: HugeIcons.strokeRoundedShare05,
               color: AppColors.textPrimary,
@@ -276,7 +285,12 @@ class OrderTrackingScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HelpSupportScreen()),
+                  );
+                },
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: AppConstants.paddingM),
                   side: const BorderSide(color: AppColors.primary),
