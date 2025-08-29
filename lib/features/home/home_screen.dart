@@ -13,6 +13,7 @@ import '../notifications/notifications_screen.dart';
 import '../cart/cart_screen.dart';
 import '../search/search_screen.dart';
 import '../wishlist/wishlist_screen.dart';
+import '../order/order_history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,8 +58,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: CustomScrollView(
               slivers: [
                 _buildCustomAppBar(),
+                SliverToBoxAdapter(child: _buildModernHeader()),
                 SliverToBoxAdapter(child: _buildSearchSection()),
-                SliverToBoxAdapter(child: _buildPromoSection()),
+                SliverToBoxAdapter(
+                  child: Container(
+                    width: double.infinity,
+                    child: _buildPromoSection())),
                 SliverToBoxAdapter(child: _buildQuickActions()),
                 SliverToBoxAdapter(child: _buildCategoriesSection()),
                 SliverToBoxAdapter(child: _buildFlashSaleSection()),
@@ -88,61 +93,174 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget _buildCustomAppBar() {
     return SliverAppBar(
-      expandedHeight: 120,
-      floating: false,
-      pinned: true,
-      backgroundColor: AppColors.white,
+      expandedHeight: 0,
+      floating: true,
+      pinned: false,
+      backgroundColor: AppColors.background,
       elevation: 0,
       automaticallyImplyLeading: false,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                AppColors.primary,
-                AppColors.primaryDark,
-              ],
-            ),
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppConstants.paddingM),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      toolbarHeight: 0,
+    );
+  }
+
+  Widget _buildModernHeader() {
+    return Container(
+      color: AppColors.background,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppConstants.paddingM),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top row with greeting and icons
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              _getGreeting(),
-                              style: AppTextStyles.bodyLarge.copyWith(
-                                color: AppColors.white.withOpacity(0.9),
-                              ),
-                            ),
-                            const SizedBox(height: AppConstants.paddingXS),
-                            Text(
-                              'Find Amazing Products',
-                              style: AppTextStyles.headlineSmall.copyWith(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _getGreeting(),
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      _buildNotificationIcon(),
-                      const SizedBox(width: AppConstants.paddingS),
-                      _buildCartIcon(),
-                    ],
+                        const SizedBox(height: AppConstants.paddingXS),
+                        Text(
+                          'What are you looking for?',
+                          style: AppTextStyles.labelLarge.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  _buildModernNotificationIcon(),
+                  const SizedBox(width: AppConstants.paddingS),
+                  _buildModernCartIcon(),
                 ],
               ),
-            ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildModernNotificationIcon() {
+    return Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(AppConstants.radiusM),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const NotificationsScreen()),
+            );
+          },
+          borderRadius: BorderRadius.circular(AppConstants.radiusM),
+          child: Stack(
+            children: [
+              const Center(
+                child: HugeIcon(
+                  icon: HugeIcons.strokeRoundedNotification02,
+                  color: AppColors.textPrimary,
+                  size: 20,
+                ),
+              ),
+              Positioned(
+                right: 10,
+                top: 10,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: AppColors.accent,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildModernCartIcon() {
+    return Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(AppConstants.radiusM),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const CartScreen()),
+            );
+          },
+          borderRadius: BorderRadius.circular(AppConstants.radiusM),
+          child: Stack(
+            children: [
+              const Center(
+                child: HugeIcon(
+                  icon: HugeIcons.strokeRoundedShoppingCart01,
+                  color: AppColors.white,
+                  size: 20,
+                ),
+              ),
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: const BoxDecoration(
+                    color: AppColors.accent,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '3',
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -156,92 +274,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return 'Good Evening! 🌙';
   }
 
-  Widget _buildNotificationIcon() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(AppConstants.radiusM),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const NotificationsScreen()),
-          );
-        },
-        icon: Stack(
-          children: [
-            const HugeIcon(
-              icon: HugeIcons.strokeRoundedNotification02,
-              color: AppColors.white,
-              size: 24,
-            ),
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(
-                  color: AppColors.accent,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCartIcon() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(AppConstants.radiusM),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const CartScreen()),
-          );
-        },
-        icon: Stack(
-          children: [
-            const HugeIcon(
-              icon: HugeIcons.strokeRoundedShoppingCart01,
-              color: AppColors.white,
-              size: 24,
-            ),
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                  color: AppColors.accent,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  '3',
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildSearchSection() {
     return Container(
-      margin: const EdgeInsets.all(AppConstants.paddingM),
+      margin: const EdgeInsets.fromLTRB(
+        AppConstants.paddingM, 
+        0, 
+        AppConstants.paddingM, 
+        AppConstants.paddingM
+      ),
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -252,16 +292,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppConstants.paddingM,
-            vertical: AppConstants.paddingM,
+            vertical: AppConstants.paddingM + 2,
           ),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(AppConstants.radiusL),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: AppColors.shadow,
-                blurRadius: 8,
-                offset: Offset(0, 2),
+                color: AppColors.shadow.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
               ),
             ],
           ),
@@ -305,7 +345,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               return _buildPromoCard(item);
             },
             options: CarouselOptions(
-              height: 180,
+              // height: 180,
+              aspectRatio: 16 / 9,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
               autoPlay: true,
@@ -341,6 +382,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget _buildPromoCard(Map<String, dynamic> item) {
     return Container(
+      width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: AppConstants.paddingS),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -389,7 +431,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: 120,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigate to sale/category page
+                      // Navigate to categories with filter based on promo
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const CategoriesScreen()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.white,
@@ -437,7 +483,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 subtitle: 'Up to 70% off',
                 color: AppColors.accent,
                 onTap: () {
-                  // Navigate to flash sale
+                  // Navigate to search with flash sale filter
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SearchScreen()),
+                  );
                 },
               )),
               const SizedBox(width: AppConstants.paddingM),
@@ -447,7 +497,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 subtitle: 'Best offers',
                 color: AppColors.secondary,
                 onTap: () {
-                  // Navigate to daily deals
+                  // Navigate to categories with deals filter
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const CategoriesScreen()),
+                  );
                 },
               )),
             ],
@@ -474,7 +528,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 subtitle: 'Order status',
                 color: AppColors.primaryDark,
                 onTap: () {
-                  // Navigate to order tracking
+                  // Navigate to order history
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const OrderHistoryScreen()),
+                  );
                 },
               )),
             ],
@@ -785,7 +843,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 const Spacer(),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigate to search with featured filter
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SearchScreen()),
+                    );
+                  },
                   child: Text(
                     'See All',
                     style: AppTextStyles.labelLarge.copyWith(
@@ -869,7 +933,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 const Spacer(),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigate to search with top rated filter
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SearchScreen()),
+                    );
+                  },
                   child: Text(
                     'See All',
                     style: AppTextStyles.labelLarge.copyWith(
@@ -952,7 +1022,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const Spacer(),
                 TextButton(
                   onPressed: () {
-                    // Clear recently viewed
+                    // Show confirmation dialog for clearing recently viewed
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Clear History'),
+                          content: const Text('Are you sure you want to clear your viewing history?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                // In a real app, this would clear the history
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('History cleared')),
+                                );
+                              },
+                              child: const Text('Clear'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   child: Text(
                     'Clear History',
