@@ -476,11 +476,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           const SizedBox(height: AppConstants.paddingM),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(child: _buildActionCard(
+              _buildCompactActionItem(
                 icon: HugeIcons.strokeRoundedFlash,
-                title: 'Flash Sale',
-                subtitle: 'Up to 70% off',
+                title: 'Flash',
                 color: AppColors.accent,
                 onTap: () {
                   // Navigate to search with flash sale filter
@@ -489,12 +489,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     MaterialPageRoute(builder: (_) => const SearchScreen()),
                   );
                 },
-              )),
-              const SizedBox(width: AppConstants.paddingM),
-              Expanded(child: _buildActionCard(
+              ),
+              _buildCompactActionItem(
                 icon: HugeIcons.strokeRoundedGift,
-                title: 'Daily Deals',
-                subtitle: 'Best offers',
+                title: 'Deals',
                 color: AppColors.secondary,
                 onTap: () {
                   // Navigate to categories with deals filter
@@ -503,16 +501,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     MaterialPageRoute(builder: (_) => const CategoriesScreen()),
                   );
                 },
-              )),
-            ],
-          ),
-          const SizedBox(height: AppConstants.paddingM),
-          Row(
-            children: [
-              Expanded(child: _buildActionCard(
+              ),
+              _buildCompactActionItem(
                 icon: HugeIcons.strokeRoundedFavourite,
                 title: 'Wishlist',
-                subtitle: 'Saved items',
                 color: AppColors.primary,
                 onTap: () {
                   Navigator.push(
@@ -520,12 +512,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     MaterialPageRoute(builder: (_) => const WishlistScreen()),
                   );
                 },
-              )),
-              const SizedBox(width: AppConstants.paddingM),
-              Expanded(child: _buildActionCard(
+              ),
+              _buildCompactActionItem(
                 icon: HugeIcons.strokeRoundedTruck,
-                title: 'Track Order',
-                subtitle: 'Order status',
+                title: 'Track',
                 color: AppColors.primaryDark,
                 onTap: () {
                   // Navigate to order history
@@ -534,7 +524,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     MaterialPageRoute(builder: (_) => const OrderHistoryScreen()),
                   );
                 },
-              )),
+              ),
             ],
           ),
         ],
@@ -542,46 +532,45 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildActionCard({
+  Widget _buildCompactActionItem({
     required IconData icon,
     required String title,
-    required String subtitle,
     required Color color,
     required VoidCallback onTap,
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppConstants.paddingM),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(AppConstants.radiusM),
-          border: Border.all(color: color.withOpacity(0.3)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HugeIcon(
-              icon: icon,
-              color: color,
-              size: 28,
-            ),
-            const SizedBox(height: AppConstants.paddingS),
-            Text(
-              title,
-              style: AppTextStyles.titleSmall.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: color.withOpacity(0.2),
+                width: 1,
               ),
             ),
-            Text(
-              subtitle,
-              style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textSecondary,
+            child: Center(
+              child: HugeIcon(
+                icon: icon,
+                color: color,
+                size: 28,
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: AppTextStyles.bodySmall.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }
