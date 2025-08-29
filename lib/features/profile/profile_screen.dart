@@ -10,6 +10,8 @@ import '../address/address_management_screen.dart';
 import '../payment/payment_methods_screen.dart';
 import '../notifications/notifications_screen.dart';
 import '../help/help_support_screen.dart';
+import '../settings/settings_screen.dart';
+import '../auth/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -57,7 +59,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               IconButton(
                 onPressed: () {
-                  // Handle settings
+                  // Navigate to settings
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                  );
                 },
                 icon: const HugeIcon(
                   icon: HugeIcons.strokeRoundedSettings01,
@@ -74,14 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: AppConstants.paddingM),
           Text(
-            'John Doe',
+            'Mohammad Rahmani',
             style: AppTextStyles.headlineSmall.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: AppConstants.paddingXS),
           Text(
-            'john.doe@email.com',
+            'rto1680@gmail.com',
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -283,7 +289,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'Sign out of your account',
             HugeIcons.strokeRoundedLogout01,
             () {
-              // Handle sign out
+              // Show logout confirmation dialog
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Sign Out'),
+                    content: const Text('Are you sure you want to sign out?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          // Navigate to login screen and clear navigation stack
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => const LoginScreen()),
+                            (route) => false,
+                          );
+                        },
+                        child: const Text('Sign Out'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             isDestructive: true,
           ),
