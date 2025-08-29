@@ -111,7 +111,7 @@ class AppConstants {
 
   // Placeholder Images
   static const String placeholderImage = 'https://via.placeholder.com/300x300/f0f0f0/cccccc?text=Como';
-  static const String placeholderUserImage = 'https://via.placeholder.com/100x100/f0f0f0/cccccc?text=User';
+  static const String placeholderUserImage = 'https://avatars.githubusercontent.com/u/17293422?v=4';
 
   // API Endpoints (for future implementation)
   static const String baseUrl = 'https://api.como.com';
