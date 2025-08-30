@@ -76,13 +76,17 @@ class ComoButton extends StatelessWidget {
             children: [
               if (icon != null) ...[
                 icon!,
-                const SizedBox(width: AppConstants.paddingS),
+                const SizedBox(width: 4),
               ],
-              Text(
-                text,
-                style: AppTextStyles.buttonText.copyWith(
-                  color: textColor ?? 
-                    (isOutlined ? AppColors.primary : AppColors.white),
+              Flexible(
+                child: Text(
+                  text,
+                  style: AppTextStyles.buttonText.copyWith(
+                    color: textColor ?? 
+                      (isOutlined ? AppColors.primary : AppColors.white),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
             ],

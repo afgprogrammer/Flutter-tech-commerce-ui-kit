@@ -82,9 +82,9 @@ class ProductService {
         category: 'electronics',
         brand: 'Apple',
         images: [
-          'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop&crop=top',
-          'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=600&fit=crop&crop=bottom',
+          'https://picsum.photos/600/600?random=10',
+          'https://picsum.photos/600/600?random=11',
+          'https://picsum.photos/600/600?random=12',
         ],
         rating: 4.8,
         reviewCount: 1247,
@@ -107,7 +107,7 @@ class ProductService {
         brand: 'Samsung',
         images: [
           'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=600&fit=crop&crop=top',
+          'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop',
         ],
         rating: 4.7,
         reviewCount: 892,
@@ -130,7 +130,7 @@ class ProductService {
         brand: 'Apple',
         images: [
           'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop',
         ],
         rating: 4.9,
         reviewCount: 756,
@@ -201,7 +201,7 @@ class ProductService {
         brand: 'Nike',
         images: [
           'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop',
         ],
         rating: 4.5,
         reviewCount: 2341,
@@ -224,7 +224,7 @@ class ProductService {
         brand: 'Levi\'s',
         images: [
           'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1544441893-675973e31985?w=600&h=600&fit=crop',
         ],
         rating: 4.4,
         reviewCount: 876,
@@ -247,7 +247,7 @@ class ProductService {
         brand: 'Coach',
         images: [
           'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop',
         ],
         rating: 4.7,
         reviewCount: 445,
@@ -270,7 +270,7 @@ class ProductService {
         brand: 'Uniqlo',
         images: [
           'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1503341338686-25301edf0055?w=600&h=600&fit=crop',
         ],
         rating: 4.3,
         reviewCount: 1823,
@@ -293,7 +293,7 @@ class ProductService {
         brand: 'Citizen',
         images: [
           'https://images.unsplash.com/photo-1524805444073-b5d2b5516b1c?w=600&h=600&fit=crop',
-          'https://images.unsplash.com/photo-1524805444073-b5d2b5516b1c?w=600&h=600&fit=crop&crop=entropy',
+          'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop',
         ],
         rating: 4.6,
         reviewCount: 567,
