@@ -21,6 +21,9 @@
 
 <div align="center">
   <img src="assets/screenshots/profile.png" width="200" alt="Profile"/>
+  <img src="assets/screenshots/notification.png" width="200" alt="notifications"/>
+  <img src="assets/screenshots/address.png" width="200" alt="address"/>
+  <img src="assets/screenshots/checkout.png" width="200" alt="checkout"/>
 </div>
 
 ---
