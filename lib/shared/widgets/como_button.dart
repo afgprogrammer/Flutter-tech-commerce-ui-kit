@@ -158,9 +158,9 @@ class ComoIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget iconButton = IconButton(
       onPressed: onPressed,
-      icon: icon is HugeIconData
+      icon: icon is HugeIcon
           ? HugeIcon(
-              icon: icon as HugeIconData,
+              icon: icon,
               color: color ?? AppColors.textPrimary,
               size: size ?? AppConstants.iconM,
             )

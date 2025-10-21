@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
               color: AppColors.textSecondary,
             ),
             activeIcon: HugeIcon(
-              icon: HugeIcons.solidRoundedHome03,
+              icon: HugeIcons.strokeRoundedHome03,
               color: AppColors.primary,
             ),
             label: 'Home',
@@ -59,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
               color: AppColors.textSecondary,
             ),
             activeIcon: HugeIcon(
-              icon: HugeIcons.solidRoundedSearch01,
+              icon: HugeIcons.strokeRoundedSearch01,
               color: AppColors.primary,
             ),
             label: 'Search',
@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
               color: AppColors.textSecondary,
             ),
             activeIcon: HugeIcon(
-              icon: HugeIcons.solidRoundedShoppingCart01,
+              icon: HugeIcons.strokeRoundedShoppingCart01,
               color: AppColors.primary,
             ),
             label: 'Cart',
@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
               color: AppColors.textSecondary,
             ),
             activeIcon: HugeIcon(
-              icon: HugeIcons.solidRoundedUser,
+              icon: HugeIcons.strokeRoundedUser,
               color: AppColors.primary,
             ),
             label: 'Profile',

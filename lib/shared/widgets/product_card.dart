@@ -233,7 +233,7 @@ class ProductCard extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                isFavorite ? HugeIcons.solidRoundedFavourite : HugeIcons.strokeRoundedFavourite,
+                isFavorite ? HugeIcons.strokeRoundedHeartAdd : HugeIcons.strokeRoundedHeartRemove,
                 color: isFavorite ? AppColors.secondary : AppColors.textSecondary,
                 size: AppConstants.iconS,
               ),
