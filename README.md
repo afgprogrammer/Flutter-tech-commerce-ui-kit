@@ -74,7 +74,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/afgprogrammer/como.git
+   git clone https://github.com/afgprogrammer/Flutter-tech-commerce-ui-kit.git
    cd como
    ```
 
